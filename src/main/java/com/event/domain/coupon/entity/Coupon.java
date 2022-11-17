@@ -32,14 +32,14 @@ public class Coupon {
         this.discount = discount;
     }
 
-    private static Coupon of(final CouponType type, final int discount) {
+    public static Coupon of(final CouponType type, final int discount) {
         return Coupon.builder()
                 .type(type)
                 .discount(discount)
                 .build();
     }
 
-    private static Coupon signUpCoupon() {
+    public  static Coupon signUpCoupon() {
         return Coupon.builder()
                 .type(CouponType.FIX)
                 .discount(SIGNUP_COUPON_DISCOUNT)

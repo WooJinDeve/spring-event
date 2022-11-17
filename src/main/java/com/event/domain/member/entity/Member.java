@@ -35,6 +35,13 @@ public class Member extends BaseEntity {
         this.nickname = nickname;
     }
 
+    public static Member of(final Email email, final String nickname){
+        return Member.builder()
+                .email(email)
+                .nickname(nickname)
+                .build();
+    }
+
     private void validate(final String nickname){
         if (nickname.length() >= NICKNAME_MAXLENGTH){
             throw new IllegalArgumentException("닉네임의 최대 길이는 10자보다 작아야합니다");

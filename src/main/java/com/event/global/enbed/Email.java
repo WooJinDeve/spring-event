@@ -21,6 +21,12 @@ public class Email {
         this.email = email;
     }
 
+    public static Email of(final String email){
+        return Email.builder()
+                .email(email)
+                .build();
+    }
+
     private void validate(final String email){
         Matcher matcher = EMAIL_PATTERN.matcher(email);
 

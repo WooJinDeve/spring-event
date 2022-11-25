@@ -27,6 +27,7 @@ public class CommentController {
 
     @PostMapping("/members/{id}/comment")
     public ResponseEntity<Void> addComment(@PathVariable(name = "id") Long memberId,
+                                           @AuthPrincipal MemberInfo memberInfo,
                                            @RequestBody @Valid CommentSaveRequest commentSaveReqDto) {
         createParentCommentUsecase.execute(memberId, commentSaveReqDto);
         return ResponseEntity.noContent().build();

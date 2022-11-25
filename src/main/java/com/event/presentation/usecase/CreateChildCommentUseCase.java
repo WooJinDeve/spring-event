@@ -28,7 +28,7 @@ public class CreateChildCommentUseCase {
         Comment parent = commentRepository.getById(id);
         Long commentId = commentWriteService.saveReply(parent, member, request);
 
-        publisher.publishEvent(new ReplyCommentNotificationRequestEvent(member, parent, commentId));
+        publisher.publishEvent(new ReplyCommentNotificationRequestEvent(member.getId(), parent.getMember().getId(), commentId));
 
         return commentId;
     }

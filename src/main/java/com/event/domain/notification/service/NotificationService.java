@@ -1,6 +1,5 @@
 package com.event.domain.notification.service;
 
-import com.event.domain.member.entity.Member;
 import com.event.domain.notification.entity.Notification;
 import com.event.domain.notification.repostiroy.NotificationRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +13,8 @@ public class NotificationService {
 
     private final NotificationRepository notificationRepository;
 
-    public void saveNotification(Member toMember, Member fromMember, String message, String URL){
-        Notification notification = Notification.of(toMember, fromMember, message, URL);
+    public void saveNotification(Long toMember, Long fromMember, Long commentId){
+        Notification notification = Notification.of(toMember, fromMember, commentId);
         notificationRepository.save(notification);
     }
 }

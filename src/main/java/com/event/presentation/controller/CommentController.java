@@ -4,6 +4,8 @@ import com.event.domain.comment.dto.CommentResponse;
 import com.event.domain.comment.dto.CommentSaveRequest;
 import com.event.domain.comment.service.CommentReadService;
 import com.event.domain.comment.service.CommentWriteService;
+import com.event.presentation.auth.AuthPrincipal;
+import com.event.presentation.auth.MemberInfo;
 import com.event.presentation.usecase.CreateChildCommentUseCase;
 import com.event.presentation.usecase.CreateParentCommentUsecase;
 import lombok.RequiredArgsConstructor;
@@ -32,9 +34,9 @@ public class CommentController {
 
     @PostMapping("/comment/{id}/reply")
     public ResponseEntity<?> addReply(@PathVariable Long id,
-                                      @RequestParam(name = "id") Long memberId,
+                                      @AuthPrincipal MemberInfo memberInfo,
                                       @RequestBody @Valid CommentSaveRequest commentSaveReqDto) {
-        createChildCommentUseCase.execute(id, memberId, commentSaveReqDto);
+        createChildCommentUseCase.execute(id, memberInfo.getId(), commentSaveReqDto);
         return ResponseEntity.noContent().build();
     }
 
@@ -46,8 +48,8 @@ public class CommentController {
 
     @DeleteMapping("/comment/{id}")
     public ResponseEntity<Void> deleteComment(@PathVariable Long id,
-                                              @RequestParam(name = "id") Long memberId) {
-        commentWriteService.delete(id, memberId);
+                                              @AuthPrincipal MemberInfo memberInfo) {
+        commentWriteService.delete(id, memberInfo.getId());
         return ResponseEntity.noContent().build();
     }
 }
